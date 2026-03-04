@@ -26,11 +26,18 @@ class Task(db.Model):
 @app.route('/add/<task_name>')
 def add_task(task_name):
     
-    new_task = Task(title = task_name)
+    user = User.query.first()
+    
+    if not user:
+        user = User(name='User1')
+        db.session.add(user)
+        db.session.commit()
+    
+    new_task = Task(title = task_name, user_id=user.id)
     db.session.add(new_task)
     db.session.commit()
     
-    return f'Added : {task_name} to the database!'
+    return f'Added : {task_name} to the database! for User ID {user.id}!'
 
 #2) Read
 @app.route('/tasks')
