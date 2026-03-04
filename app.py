@@ -37,7 +37,7 @@ def add_task(task_name):
     db.session.add(new_task)
     db.session.commit()
     
-    return f'Added : {task_name} to the database! for User ID {user.id}!'
+    return f'Added : {task_name} to the database! for User ID {user.id}! whose name is {user.name}'
 
 #2) Read
 @app.route('/tasks')
